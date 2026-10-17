@@ -1,0 +1,140 @@
+{
+ "version": "2026-10-17",
+ "entries": [
+  {
+   "id": "bayeux-tapestry-closed-2027",
+   "date": "2026-10-17",
+   "title": "Bayeux Tapestry closed until autumn 2027",
+   "detail": "The Tapestry is off display while its new museum is built; reopening is announced for autumn 2027. The cathedral, old town and D-Day sites are open. Planner suggestions now skip the Tapestry.",
+   "towns": [
+    "bayeux"
+   ],
+   "highlight": true,
+   "source": "https://www.bayeuxmuseum.com/en/",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "penne-1euro-window-closed",
+   "date": "2026-10-17",
+   "title": "Penne: €1-home call closed 31 January 2026",
+   "detail": "The December 2025 call listed five old-town buildings with applications due by 31 January 2026. No new call has been published. Treat the programme as a framework and ask the Comune before planning a visit around it.",
+   "towns": [
+    "penne"
+   ],
+   "highlight": true,
+   "source": "https://www.comune.penne.pe.it/it/news/150192/case-ad-un-euro-nel-borgo-di-penne",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "hirosaki-keep-return-2026",
+   "date": "2026-10-17",
+   "title": "Hirosaki Castle keep returns to its base",
+   "detail": "The keep is being moved back onto its repaired stone base during 2026. The interior is closed for conservation works planned to run to about 2033, and from autumn 2028 the exterior will be under a protective cover.",
+   "towns": [
+    "hirosaki"
+   ],
+   "source": "https://www.city.hirosaki.aomori.jp/ishigaki/CastleTowerReturn2026March.html",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "evora-asking-prices-2026-09",
+   "date": "2026-10-17",
+   "title": "Évora: city asking prices about €2,865/m²",
+   "detail": "Idealista's September 2026 series puts average asking prices in Évora city near €2,865 per square metre. Village and rural-district stock can be far cheaper; the dossier figure is now scoped and dated.",
+   "towns": [
+    "evora"
+   ],
+   "source": "https://www.idealista.pt/media/relatorios-preco-habitacao/venda/evora-provincias/evora/evora/historico/",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "france-renovation-grants-main-home",
+   "date": "2026-10-17",
+   "title": "France: renovation grants need a main residence",
+   "detail": "ANAH and MaPrimeRénov' grants apply to a main residence you live in, or one let long-term as a tenant's main home. A second home or holiday let does not qualify. The French town profiles now say so.",
+   "countries": [
+    "France"
+   ],
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35083",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "etias-q4-2026",
+   "date": "2026-10-17",
+   "title": "ETIAS: €20, valid 3 years, start date still unannounced",
+   "detail": "The EU still says the last quarter of 2026 and promises six months' notice of the exact date. Nothing is needed until then; apply only on the official site when it opens.",
+   "countries": [
+    "Austria",
+    "Belgium",
+    "Bulgaria",
+    "Croatia",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Italy",
+    "Latvia",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Netherlands",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Slovakia",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland"
+   ],
+   "source": "https://travel-europe.europa.eu/en/etias",
+   "checked": "2026-10-17"
+  },
+  {
+   "id": "ees-live-2026-04-10",
+   "date": "2026-10-17",
+   "title": "EES has replaced passport stamps",
+   "detail": "The EU Entry/Exit System has been fully live since 10 April 2026: your 90/180 days are recorded electronically at the Schengen border. The Stay Counter helps you keep your own record.",
+   "countries": [
+    "Austria",
+    "Belgium",
+    "Bulgaria",
+    "Croatia",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Italy",
+    "Latvia",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Netherlands",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Slovakia",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland"
+   ],
+   "source": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en",
+   "checked": "2026-10-17"
+  }
+ ]
+}
