@@ -524,7 +524,7 @@ h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.1;text-wrap:balanc
 /* Quiet cartographic details: two selected surfaces, no layout or image weight. */
 .app-showcase,.home-page #editions{position:relative;isolation:isolate}
 .app-showcase::before,.home-page #editions::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-repeat:no-repeat}
-.app-showcase::before{background-image:url(contours.svg);background-position:right center;background-size:620px auto;opacity:.21}
+.app-showcase::before{background-image:none;background-position:right center;background-size:620px auto;opacity:.21}
 .home-page #editions::before{background-image:url(compass-lines.svg);background-position:calc(100% + 100px) -100px;background-size:500px;opacity:.17}
 @media(max-width:700px){
   .app-showcase::before{background-size:480px auto;background-position:calc(100% + 165px) 66%;opacity:.2}
@@ -541,13 +541,6 @@ h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.1;text-wrap:balanc
 @media(max-width:700px){
   .home-page{display:flex;flex-direction:column}
   .home-page>.wrap:has(.app-spotlight){display:none}
-  .home-page>.proof-band{order:1}
-  .home-page>.places{order:2}
-  .home-page>.explorer-section{order:3}
-  .home-page>.app-showcase{order:4}
-  .home-page>#editions{order:5}
-  .home-page>.method-section{order:6}
-  .home-page>.closing{order:7}
   .home-page .proof-band{background:#173d38;border:0}
   .home-page .proof-band .wrap{grid-template-columns:1fr 1fr;padding-block:14px;gap:12px}
   .home-page .proof-band .wrap>span{padding:0;gap:9px;font-size:.7rem;letter-spacing:0;color:#d4dfd0}
@@ -648,3 +641,29 @@ h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:1.1;text-wrap:balanc
 .photo-hero{margin-top:22px}
 .photo-hero img{display:block;margin-inline:auto;height:auto;max-height:none}
 @media(max-width:700px){.town-locator,.town-locator[open]{max-width:none}.photo-hero{margin-top:0}}
+/* 17 October: Fourthwall buy note on the dossiers page */
+.buy-note{margin:8px 0 36px;padding:20px 22px;border-radius:14px;background:rgba(201,162,78,.10);border:1px solid rgba(201,162,78,.35)}
+.buy-note p{margin:0 0 10px}.buy-note p:last-child{margin:14px 0 0}
+
+/* Tourism and Atlas: equal entry points, current native-app media (17 Oct 2026). */
+.two-path-opening{padding-top:64px;padding-bottom:64px}
+.two-path-heading{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:14px 48px;margin-bottom:38px}
+.two-path-heading .kick{grid-column:1/-1}.two-path-heading h1{font-size:clamp(52px,5.8vw,90px);line-height:.98;margin:0}.two-path-heading .lead{max-width:500px;margin:0 0 5px}
+.two-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.path-card{min-width:0;border:1px solid var(--line);display:flex;flex-direction:column;background:#f8f3e8}
+.path-visual{display:block;position:relative}.path-visual img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#0b1c2b}.path-visual>span{position:absolute;bottom:16px;left:16px;padding:9px 14px;background:#0b1c2bf0;color:#ead39a;font:500 13px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.path-copy{padding:26px 28px 20px;display:flex;flex:1;flex-direction:column}.path-copy h2{font-size:clamp(30px,3vw,43px);margin:0 0 12px}.path-copy p{max-width:46ch;margin:0 0 24px}.path-copy .btn{margin-top:auto;width:100%;min-height:54px;justify-content:space-between}.image-note{font-size:12px;line-height:1.5;margin-top:14px;opacity:.7;min-height:36px}
+.real-app-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);align-items:center;gap:clamp(40px,9vw,140px)}
+.actual-app{margin:0 auto;max-width:330px;width:100%}.actual-app video{display:block;width:100%;height:auto;border:7px solid #263542;border-radius:42px;background:#0b1c2b;box-shadow:0 24px 70px #0005}.actual-app figcaption{font-size:12px;line-height:1.65;color:#bdc8cf;text-align:center;margin-top:18px}.actual-app a{color:#e6c875}
+.journey-steps{padding:0;list-style:none;margin:28px 0 30px}.journey-steps li{display:flex;gap:19px;padding:20px 0;border-top:1px solid #ffffff25}.journey-steps li>span{font:500 13px var(--sans);color:#d4b76a;padding-top:8px}.journey-steps h3{font-size:28px;line-height:1.15;margin:0 0 6px}.journey-steps p{font-size:16px;line-height:1.6;margin:0;color:#c2cbd1}.release-note{font:400 13px var(--sans);color:#bdc8cf;margin-top:20px}
+.three-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}.three-notes article{border-top:1px solid #ffffff40;padding-top:24px}.three-notes h3{font-size:32px;margin:0 0 12px}.three-notes p{color:#c2cbd1;margin:0}.equal-ctas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:610px;gap:16px;margin:34px auto 0}.equal-ctas .btn{justify-content:center;min-height:56px}
+.real-screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px}.screen-story{margin:0;min-width:0}.screen-story img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:5px solid #25313d;border-radius:33px;box-shadow:0 16px 32px #15273820}.screen-story figcaption{margin:25px auto 0;max-width:300px}.screen-story h3{font-size:29px;line-height:1.1;margin:0 0 12px}.screen-story p{font-size:16px;line-height:1.6;margin:0}
+.visit-feature{display:grid;grid-template-columns:minmax(250px,330px) minmax(0,1fr);gap:clamp(35px,8vw,110px);align-items:center;max-width:990px;margin:0 auto}.visit-feature figure{margin:0}.visit-feature img{width:100%;height:auto;display:block;border:6px solid #263542;border-radius:38px}.visit-feature h3{font-size:36px;margin:30px 0 14px}.visit-feature h3:first-child{margin-top:0}.visit-feature p{color:#c2cbd1}
+.walkthrough-text li{padding:6px 0}.home-page .country-choices button{min-height:44px;width:100%;white-space:normal}.home-page .country-choices{grid-auto-rows:minmax(44px,auto)}
+@media(max-width:900px){.two-path-heading{gap:16px 25px}.real-app-grid{gap:40px;grid-template-columns:1fr 280px}.actual-app{max-width:280px}.real-screens{gap:24px}.screen-story img{border-radius:26px}.three-notes{gap:22px}.visit-feature{gap:40px;grid-template-columns:250px 1fr}}
+@media(max-width:700px){.two-path-opening{padding-top:34px;padding-bottom:36px}.two-path-heading{display:block;margin-bottom:27px}.two-path-heading .kick{margin-bottom:16px}.two-path-heading h1{font-size:58px}.two-path-heading .lead{font-size:21px;margin-top:20px}.two-paths{grid-template-columns:1fr;gap:24px}.path-copy{padding:24px}.path-copy h2{font-size:34px}.path-copy p{font-size:17px}.path-visual>span{font-size:11px}.image-note{min-height:0}.real-app-grid{grid-template-columns:1fr;gap:35px}.actual-app{max-width:285px}.app-story .lead{font-size:20px}.journey-steps{margin:24px 0}.journey-steps li{padding:15px 0}.journey-steps h3{font-size:26px}.three-notes{grid-template-columns:1fr;gap:26px}.three-notes h3{font-size:29px}.equal-ctas{grid-template-columns:1fr;max-width:350px}.real-screens{grid-template-columns:1fr;gap:40px}.screen-story{display:grid;grid-template-columns:minmax(125px,.85fr) 1fr;gap:20px;align-items:center}.screen-story img{border-width:3px;border-radius:20px}.screen-story figcaption{margin:0}.screen-story h3{font-size:26px}.screen-story p{font-size:15px}.visit-feature{grid-template-columns:1fr;gap:30px}.visit-feature figure{max-width:270px;margin:auto}.visit-feature h3{font-size:31px}.proof-band .wrap{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){.actual-app video{scroll-behavior:auto}}
+.app-showcase,.home-page .app-showcase{background:#102638;color:#f5efe2}.app-showcase h2{color:#f5efe2}.app-showcase h2 em{color:#e6c875}.app-showcase .kick{color:#d6bd80}.app-showcase .lead{color:#d0d8dc;max-width:46ch}.app-showcase .journey-steps h3{color:#f5efe2}.app-showcase::before{opacity:.08}.app-showcase .btn-p{background:#ecd697;color:#172c35}
+@media(max-width:700px){.home-page>section,.home-page>div{order:initial}.home-page .proof-band .wrap>span:nth-child(n+3){display:flex}.home-page .places .section-head>p{display:block}.home-page .places .place-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;gap:12px}.home-page .places .place-card{width:auto;min-width:0;scroll-snap-align:none}.home-page .places .place-card h3{font-size:21px;margin-top:10px}.home-page .places .place-card>a:last-child{font-size:10px}.home-page .places .place-image img{width:100%;height:auto;aspect-ratio:auto}.home-page .places .place-image{aspect-ratio:auto}.home-page .places .place-image>span{display:none}.home-page .app-showcase .lead{font-size:18px;max-width:none}}
+
+.two-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}.two-notes article{border-top:1px solid #ffffff40;padding-top:24px;display:flex;flex-direction:column}.two-notes h3{font-size:32px;margin:0 0 12px}.two-notes p{color:#c2cbd1;margin:0 0 22px}.two-notes .btn{margin-top:auto;justify-content:space-between;width:100%;min-height:54px}@media(max-width:700px){.two-notes{grid-template-columns:1fr;gap:30px}.two-notes h3{font-size:29px}.actual-app{order:-1}.home-page .real-app-grid{gap:28px}}

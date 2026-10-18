@@ -250,10 +250,10 @@
     // country hover and click
     $$("path.dossier", m.land).forEach(p => {
       const c = g.countries[p.dataset.slug];
-      p.setAttribute("tabindex", "0"); p.setAttribute("role", "link"); p.setAttribute("aria-label", `${c.name}, ${c.n} ${c.noun}`);
-      const go = () => (location.href = localPage(c.url));
+      p.setAttribute("tabindex", "0"); p.setAttribute("role", host.classList.contains("interactive-map")?"button":"link"); p.setAttribute("aria-label", `${c.name}, ${c.n} ${c.noun}`);
+      const go = () => host.classList.contains("interactive-map") ? host.dispatchEvent(new CustomEvent("selectcountry",{detail:p.dataset.slug})) : (location.href = localPage(c.url));
       p.addEventListener("click", go);
-      p.addEventListener("keydown", e => e.key === "Enter" && go());
+      p.addEventListener("keydown", e => {if(e.key === "Enter"||(e.key === " "&&host.classList.contains("interactive-map"))){e.preventDefault();go()}});
       p.addEventListener("pointerenter", () => { m.highlight(p.dataset.slug); showCard(card, c, p); host.dispatchEvent(new CustomEvent("country", { detail: p.dataset.slug })); });
       p.addEventListener("pointerleave", () => { m.highlight(null); card && card.classList.remove("show"); });
     });
@@ -261,7 +261,7 @@
   }
   function showCard(card, c, path) {
     if (!card) return;
-    card.replaceChildren(textNode('span', c.series, 'k'), textNode('b', c.name), textNode('span', `${c.n} ${c.noun} · ${c.pages} pages`), textNode('em', 'Open the shortlist →'));
+    card.replaceChildren(textNode('span', c.series, 'k'), textNode('b', c.name), textNode('span', `${c.n} ${c.noun} · ${c.pages} pages`), textNode('em', 'Open the Shortlist →'));
     const r = path.getBoundingClientRect(), h = card.parentElement.getBoundingClientRect();
     card.style.left = Math.min(h.width - 230, Math.max(8, r.left - h.left + r.width / 2 - 110)) + "px";
     card.style.top = Math.max(8, r.top - h.top - 96) + "px";
@@ -369,7 +369,7 @@
     const attachSearch=(root,getMap)=>{
       if(!root)return;
       const input=$(".atlas-search input",root),buttons=$$(".chips button",root),rows=$$(".atlas-list>li[data-region]",root);
-      const empty=document.createElement('p');empty.className='atlas-empty';empty.textContent='No places match. Try another name or choose All regions.';empty.hidden=true;$(".atlas-side",root).append(empty);
+      const empty=document.createElement('p');empty.className='atlas-empty';empty.textContent='No places match. Try another name, or choose All.';empty.hidden=true;$(".atlas-side",root).append(empty);
       let selected='all';
       const filter=()=>{
         const q=input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -412,62 +412,58 @@
     const render=async(slug,animate=true)=>{
       selected=slug;const token=++seq,c=g.countries[slug];buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapCountry===slug)));
       if(select)select.value=slug;
-      const listDetails=townList.closest('details');if(listDetails){listDetails.hidden=false;listDetails.open=matchMedia('(min-width:701px)').matches}
-      heading.textContent=c.name;link.textContent=`Explore ${c.name} →`;link.href=localPage(c.url);link.hidden=false;
+      const listDetails=townList.closest('details');if(listDetails){listDetails.hidden=false;listDetails.open=true;listDetails.querySelector('summary').firstChild.textContent='Explore the Shortlisted Towns ';}
+      section.dataset.selectedCountry=slug;heading.textContent=c.name;link.textContent=`Explore ${c.name} →`;link.href=localPage(c.url);link.hidden=false;
       const pins=allPins(g).filter(p=>p.country===slug);
       townList.replaceChildren(...pins.map(p=>{
         const a=document.createElement('a');a.href=localPage(c.url+p.slug+'/');a.dataset.focus=p.slug;
-        a.append(textNode('b',p.rank),document.createTextNode(p.name));return a;
+        a.style.setProperty('--order',p.rank-1);a.append(textNode('b',p.rank),textNode('span',p.name),textNode('i','↗'));return a;
       }));
       townList.querySelectorAll('a').forEach(a=>{a.addEventListener('pointerenter',()=>{m.highlight(a.dataset.focus);m.layout()});a.addEventListener('focus',()=>{m.highlight(a.dataset.focus);m.layout()})});
       m.setPins([]);m.highlight(slug);await m.cam(c.box,{f:.42,dur:animate?1050:0});if(token!==seq)return;
       m.setPins(pins,{labels:99,stagger:0,href:p=>localPage(`${slug}/${p.slug}/`)});m.layout();
     };
-    const stop=()=>{playing=false;clearTimeout(timer);tour.textContent='Play tour';tour.setAttribute('aria-pressed','false')};
+    const overview=async(kind,animate=true)=>{
+      const token=++seq;buttons.forEach(b=>b.setAttribute('aria-pressed','false'));
+      heading.textContent=kind==='europe'?'Europe · Eight Country Atlases':'The Whole Atlas';
+      link.hidden=true;m.setPins([]);m.highlight(null);
+      const countries=Object.entries(g.countries).filter(([slug,c])=>kind==='world'||c.region==='Europe');
+      const details=townList.closest('details');if(details){details.hidden=false;details.open=true;details.querySelector('summary').firstChild.textContent='Choose a Country Atlas ';}
+      townList.replaceChildren(...countries.map(([slug,c])=>{const b=document.createElement('button');b.type='button';b.dataset.atlasCountry=slug;b.append(textNode('b',c.n),textNode('span',c.name),textNode('i','↗'));b.addEventListener('click',()=>{stop();render(slug)});return b}));
+      await m.cam(kind==='europe'?g.regions.Europe:[0,0,g.W,g.H],{f:.08,dur:animate?1050:0});
+      if(token!==seq)return;
+      m.setPins(countries.map(([slug,c])=>({slug,name:c.name,x:c.center[0],y:c.center[1]})),{stagger:35});
+      m.pinEls.forEach(p=>{p.setAttribute('tabindex','0');p.setAttribute('role','button');p.setAttribute('aria-label','Explore '+g.countries[p.dataset.slug].name+' map');p.style.cursor='pointer';const go=()=>{stop();render(p.dataset.slug)};p.addEventListener('click',go);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+    };
+    const stop=()=>{playing=false;clearTimeout(timer);tour.textContent='Play Tour';tour.setAttribute('aria-pressed','false')};
     const schedule=()=>{clearTimeout(timer);if(playing&&visible&&!document.hidden)timer=setTimeout(()=>{const i=buttons.findIndex(b=>b.dataset.mapCountry===selected);render(buttons[(i+1)%buttons.length].dataset.mapCountry);schedule()},6500)};
     buttons.forEach(b=>b.addEventListener('click',()=>{stop();render(b.dataset.mapCountry)}));
+    host.addEventListener('selectcountry',e=>{stop();render(e.detail)});
     select?.addEventListener('change',()=>{if(select.value==='world')$('[data-map-world]',section).click();else{stop();render(select.value)}});
-    $('[data-map-world]',section).addEventListener('click',()=>{stop();seq++;if(select)select.value='world';buttons.forEach(b=>b.setAttribute('aria-pressed','false'));heading.textContent='The Whole Atlas';townList.replaceChildren();if(townList.closest('details'))townList.closest('details').hidden=true;link.hidden=true;m.setPins([]);m.highlight(null);m.cam([0,0,g.W,g.H],{f:.04})});
+    $('[data-map-world]',section).addEventListener('click',()=>{stop();overview('world')});
+    $('[data-map-europe]',section)?.addEventListener('click',()=>{stop();overview('europe')});
     matchMedia('(min-width:701px)').addEventListener('change',e=>{if(townList.closest('details'))townList.closest('details').open=e.matches});
-    tour.addEventListener('click',()=>{if(playing)stop();else{playing=true;tour.textContent='Pause tour';tour.setAttribute('aria-pressed','true');render(selected);schedule()}});
+    tour.addEventListener('click',()=>{if(playing)stop();else{playing=true;tour.textContent='Pause Tour';tour.setAttribute('aria-pressed','true');render(selected);schedule()}});
     new IntersectionObserver(es=>{visible=es[0].isIntersecting;schedule()},{threshold:.15}).observe(section);
-    document.addEventListener('visibilitychange',schedule);render(selected,false);
+    document.addEventListener('visibilitychange',schedule);overview('europe',false);
   }
 
   /* ------------------------------------------------------------- motion kit */
   function reveals() {
     const io = new IntersectionObserver(es => es.forEach(e => {
+      e.target.classList.toggle("in",e.isIntersecting);
       if (!e.isIntersecting) return;
-      e.target.classList.add("in"); io.unobserve(e.target);
       if (e.target.dataset.count) count(e.target);
     }), { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
     $$("[data-reveal],[data-count],.split-lines").forEach(n => io.observe(n));
   }
   function count(n) {
-    const to = +n.dataset.count, dur = REDUCED ? 0 : 1400, t0 = performance.now();
-    const fmt = v => Math.round(v).toLocaleString("en-US");
-    const step = now => { const t = Math.min(1, (now - t0) / (dur || 1)); n.textContent = fmt(to * ease(t)); if (t < 1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
+    // Facts stay readable immediately; motion belongs to the map and compass.
+    n.textContent = Math.round(+n.dataset.count).toLocaleString("en-US");
   }
   function splitLines() {
-    // wrap each word so headings rise in word by word
-    $$(".split-lines").forEach(h => {
-      if (h.dataset.split) return; h.dataset.split = 1;
-      const walk = node => [...node.childNodes].forEach(c => {
-        if (c.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          c.textContent.split(/(\s+)/).forEach(w => {
-            if (!w) return;
-            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
-            const o = document.createElement("span"); o.className = "w";
-            const i = document.createElement("span"); i.textContent = w; o.appendChild(i); frag.appendChild(o);
-          });
-          c.replaceWith(frag);
-        } else if (c.nodeType === 1) walk(c);
-      });
-      walk(h);
-      $$(".w > span", h).forEach((s, i) => (s.style.transitionDelay = i * 45 + "ms"));
-    });
+    // Animate complete headings; word masks clipped serif ascenders and accents.
+    $$(".split-lines").forEach(h => h.setAttribute('data-reveal',''));
   }
   function header() {
     const h = $(".hdr"); if (!h) return;
@@ -516,5 +512,5 @@
   const hero = $(".hero-map"); if (hero) heroWorld(hero);
   const st = $(".story"); if (st) story(st);
   $$(".country-map").forEach(countryMap);
-  const ex = $(".atlas-explorer"); if(ex) explorer(ex).catch(()=>{$(".interactive-map",ex).textContent="The map could not load. All countries and town profiles remain available below."});
+  const ex = $(".atlas-explorer"); if(ex) explorer(ex).catch(()=>{$(".interactive-map",ex).textContent="The map didn’t load. Every country and town profile is still listed below."});
 })();
