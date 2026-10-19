@@ -74,10 +74,10 @@
   function render(){
     results.replaceChildren();const start=page*12;
     matches.slice(start,start+12).forEach(p=>{
-      const card=make('article','','catalog-result');card.append(make('span',`${p.d} · ${p.c}`),make('h2',p.n));
+      const card=make('article','','catalog-result');card.append(make('span',`${p.d} · ${p.c}`),make('h2',p.n));if(p.closed)card.append(make('p','Temporarily closed. Check the venue before you plan a visit.','catalog-closed'));
       const cats=(p.k||[]).map(c=>[...category.options].find(o=>o.value===c)?.textContent).filter(Boolean);if(cats.length)card.append(make('p',cats.join(' · ')));
-      const detail=make('details','');detail.append(make('summary','Source & Review Date'),make('p',(p.s||'Source not recorded')+(p.checked?` · Recorded review: ${p.checked}`:' · Review date not recorded')));card.append(detail);
-      const actions=make('div','','result-links'), website=urlSafe(p.u);if(website)actions.append(link(website,'Place Website ↗'));
+      const detail=make('details','');detail.append(make('summary','Source & Date'),make('p',(p.s||'Source not recorded')+(p.checked?` · Source dated ${p.checked}`:' · Source date not recorded')));card.append(detail);
+      const actions=make('div','','result-links'), website=urlSafe(p.u);if(website){let host='';try{host=new URL(website).hostname}catch(e){}actions.append(link(website,/(^|\.)(wikipedia|wikivoyage|wikidata)\.org$/i.test(host)?'Read Reference ↗':'Visit Website ↗'))}
       if(typeof p.lat==='number'&&typeof p.lon==='number'&&Math.abs(p.lat)<=90&&Math.abs(p.lon)<=180&&(p.lat!==0||p.lon!==0))actions.append(link(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.lat},${p.lon}`)}`,'View on Map ↗'));
       if(actions.childElementCount)card.append(actions);results.append(card);
     });
