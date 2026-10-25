@@ -1,0 +1,77 @@
+/* Decorative travel illustrations. Text and interactive surfaces always take priority. */
+[data-atlas-ornament-section]{position:relative;isolation:isolate;overflow:clip}
+[data-atlas-ornament-section]>.wrap{position:relative;z-index:1}
+.travel-ornament{--travel-rail:clamp(180px,calc((100vw - 1640px)/2 + 36px),360px);position:absolute;z-index:0;width:var(--travel-rail);height:360px;top:calc(50% - 180px);pointer-events:none;user-select:none;overflow:hidden;color:#927747;opacity:.26;contain:layout paint}
+.travel-ornament[data-ornament-side=left]{left:0;mask-image:linear-gradient(90deg,#000 18%,#000 62%,transparent)}
+.travel-ornament[data-ornament-side=right]{right:0;mask-image:linear-gradient(90deg,transparent,#000 34%,#000)}
+.travel-ornament svg{display:block;position:absolute;width:340px;height:340px;top:10px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.travel-ornament[data-ornament-side=left] svg{left:calc((var(--travel-rail) - 340px)/2 - 12px)}
+.travel-ornament[data-ornament-side=right] svg{right:calc((var(--travel-rail) - 340px)/2 - 12px)}
+.product-opening>.travel-ornament,.destination-opening>.travel-ornament{top:auto;bottom:18px}
+.product-navigation>.travel-ornament{top:32%}
+.product-faq>.travel-ornament{top:auto;bottom:110px}
+.travel-ornament[data-ornament-tone=cool]{color:#65747a;opacity:.25}
+.travel-ornament[data-ornament-tone=sage]{color:#365b68;opacity:.25}
+.travel-ornament[data-ornament-tone=dark]{color:#f0dba4;opacity:.24}
+.travel-ornament text{font-family:Georgia,serif;text-anchor:middle;fill:currentColor;stroke:none;letter-spacing:2.4px}
+.travel-ornament .country-stamp{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;font-weight:500}
+.travel-ring,.travel-rose{transform-box:view-box;transform-origin:160px 160px}
+.travel-ring{animation:travel-orbit 56s linear infinite}
+.travel-rose{animation:travel-orbit 92s linear infinite reverse}
+.travel-plane-body{animation:travel-drift 12s ease-in-out infinite}
+.travel-air{stroke-dasharray:32 250;animation:travel-airflow 9s linear infinite;opacity:.75}
+.travel-air.air-two{animation-delay:-3s;animation-duration:12s}
+.travel-air.air-three{animation-delay:-6s;animation-duration:10s}
+.passport-stamp{opacity:0;animation:travel-stamp 24s ease-in-out infinite;transform-origin:160px 220px}
+.passport-stamp.stamp-first{opacity:1}
+.passport-stamp.stamp-two{animation-delay:-16s}
+.passport-stamp.stamp-three{animation-delay:-8s}
+.travel-boat{transform-origin:160px 235px;animation:travel-bob 15s ease-in-out infinite}
+.travel-water{animation:travel-water 18s ease-in-out infinite}
+.travel-meridians{transform-origin:160px 143px;animation:travel-meridian 24s ease-in-out infinite}
+.travel-luggage-tag{transform-origin:181px 77px;animation:travel-tag 15s ease-in-out infinite}
+.travel-lens{transform-origin:161px 177px;animation:travel-orbit 96s linear infinite}
+.travel-wheel{animation:travel-orbit 14s linear infinite}
+.travel-wheel.wheel-one{transform-origin:103px 228px}
+.travel-wheel.wheel-two{transform-origin:225px 228px}
+.travel-rail{animation:travel-track 12s linear infinite}
+.travel-pin-ring{transform-origin:156px 181px;animation:travel-pin 16s ease-in-out infinite}
+/* Offscreen, hidden-tab and user-paused artwork consumes no animation time. */
+.travel-ornament *{animation-play-state:paused}
+.travel-ornament[data-ornament-visible=true] *{animation-play-state:running}
+.motion-paused .travel-ornament *,[data-atlas-page-hidden=true] .travel-ornament *{animation-play-state:paused!important}
+@keyframes travel-orbit{to{transform:rotate(360deg)}}
+@keyframes travel-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,-5px)}}
+@keyframes travel-airflow{from{stroke-dashoffset:282}to{stroke-dashoffset:0}}
+@keyframes travel-stamp{0%,25%,100%{opacity:1;transform:translateY(0)}33%,92%{opacity:0;transform:translateY(3px)}}
+@keyframes travel-bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-4px) rotate(1deg)}}
+@keyframes travel-water{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+@keyframes travel-meridian{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.25)}}
+@keyframes travel-tag{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+@keyframes travel-track{to{stroke-dashoffset:64}}
+@keyframes travel-pin{0%,100%{transform:scale(.85);opacity:.35}50%{transform:scale(1.12);opacity:.8}}
+/* A clear corner replaces the side rail when the viewport has no spare margin. */
+@media(max-width:1999px) and (min-width:701px){
+ [data-atlas-ornament-section]{padding-bottom:192px!important}
+ .travel-ornament{--travel-rail:220px!important;width:220px;height:176px;top:auto!important;bottom:4px!important}
+ .travel-ornament svg{width:220px;height:220px;top:-20px}
+ .travel-ornament[data-ornament-side=left] svg{left:-28px}
+ .travel-ornament[data-ornament-side=right] svg{right:-28px}
+ .travel-ornament.ornament-passport svg{width:210px;height:210px;top:-18px}
+}
+/* One small illustration per mobile page; hidden illustrations add no space. */
+@media(max-width:700px){
+ .travel-ornament{display:none}
+ [data-atlas-ornament-section]:has(>.travel-ornament[data-ornament-mobile]){padding-bottom:166px!important}
+ .travel-ornament[data-ornament-mobile]{display:block;--travel-rail:180px!important;width:180px;height:150px;top:auto!important;bottom:4px!important;opacity:.23}
+ .travel-ornament[data-ornament-mobile] svg{width:170px;height:170px;top:-4px}
+ .travel-ornament[data-ornament-side=left] svg{left:-8px}
+ .travel-ornament[data-ornament-side=right] svg{right:-8px}
+ .travel-ornament.ornament-passport svg{width:160px;height:160px;top:-2px}
+}
+@media(prefers-reduced-motion:reduce){
+ .travel-ornament *{animation:none!important}
+ .passport-stamp{opacity:0!important}
+ .passport-stamp.stamp-first{opacity:1!important}
+}
+@media print{.travel-ornament{display:none!important}[data-atlas-ornament-section]{padding-bottom:32px!important}}

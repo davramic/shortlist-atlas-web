@@ -216,3 +216,16 @@ dialog#atlas .atlas-close{color:#213b4a;border:1px solid #c9bca2;background:#fff
 .footer-social{margin-top:20px}.footer-identity .footer-social-label{margin:0 0 10px;max-width:none;color:#d8bd7a;font:600 .74rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase}.footer-social ul{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}.footer-social .social-link{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 18px 0 14px;border:1px solid #c99a2e8c;border-radius:999px;background:#ffffff0a;color:#f4eee3;font:500 .92rem/1 var(--sans);text-decoration:none;transition:background .25s,border-color .25s,color .25s,transform .25s}.footer-social .social-link svg{width:18px;height:18px;color:#e2c47e;transition:color .25s}.footer-social .social-link:hover{background:linear-gradient(135deg,#f0ddb0,#c99a2e);border-color:#f0ddb0;color:#112137;transform:translateY(-1px)}.footer-social .social-link:hover svg{color:#112137}.footer-social .social-link:focus-visible{outline:2px solid #f0ddb0;outline-offset:3px}
 @media(max-width:700px){.footer-social{margin:4px 0 14px}}
 @media(prefers-reduced-motion:reduce){.footer-social .social-link,.footer-social .social-link svg{transition:none}.footer-social .social-link:hover{transform:none}}
+/* 25 Oct 2026 store launch: official App Store and Google Play badges (equal heights), plan prices. */
+.store-badges{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:18px 0 0}
+.store-badge{display:inline-flex;border-radius:10px;line-height:0;transition:transform .25s var(--ease),box-shadow .25s}
+.store-badge img{display:block;height:50px;width:auto}
+.store-badge:hover{transform:translateY(-2px);box-shadow:0 10px 22px #0b152433}
+.store-badge:focus-visible{outline:2px solid #c99a2e;outline-offset:3px}
+.hero-badges{margin-top:22px}
+.footer-apps{margin-top:20px}.footer-apps .store-badges{margin:0}.footer-apps .store-badge img{height:46px}
+.footer-apps .store-badge:hover{box-shadow:0 10px 22px #0006}
+.catalog-app-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:14px}.catalog-app-actions .store-badges{margin:0}
+.membership-grid .plan-price{margin:-6px 0 14px;color:#213b4a;font:500 1rem/1.35 var(--sans)}.membership-grid .plan-price b{font:600 1.45rem/1 var(--sans);letter-spacing:-.02em;color:#152c43}
+@media(max-width:700px){.footer-apps{margin:6px 0 18px}.catalog-app-actions{justify-content:flex-start;margin-top:16px}.catalog-app-actions .btn{margin-top:0}.store-badge img{height:46px}}
+@media(prefers-reduced-motion:reduce){.store-badge{transition:none}.store-badge:hover{transform:none}}
